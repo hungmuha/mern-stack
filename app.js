@@ -3,9 +3,17 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var bodyParser = require('body-parser');
+var mongoose = require('mongoose');
+mongoose.Promise = require('bluebird');
+mongoose.connect('mongodb://localhost/mern-secure', { promiseLibrary: require('bluebird') })
+  .then(() =>  console.log('connection succesful'))
+  .catch((err) => console.error(err));
 
 var book = require('./routes/book');
+var auth = require('./routes/auth');
+
 var app = express();
+app.use('/api/auth', auth);
 
 app.use(logger('dev'));
 app.use(bodyParser.json());

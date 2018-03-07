@@ -13,6 +13,7 @@ var book = require('./routes/book');
 var auth = require('./routes/auth');
 
 var app = express();
+app.set('view engine','html');
 app.use('/api/auth', auth);
 
 app.use(logger('dev'));
